@@ -1,0 +1,6 @@
+{
+  "name": "∅ ONE™ — Streetwear Store & Electronic Payments",
+  "description": "منصة متجر ∅ ONE™ لعرض منتجات الستريت وير مع نظام دفع إلكتروني متكامل ولوحة تحكم شاملة.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

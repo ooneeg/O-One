@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>∅ ONE™ — NOT MADE TO FIT IN</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Space Grotesk, Syne & Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'Space Grotesk', 'sans-serif'],
+                        display: ['Syne', 'Cairo', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace']
+                    },
+                    colors: {
+                        obsidian: '#080808',
+                        charcoal: '#121212',
+                        concrete: '#1E1E1E',
+                        ash: '#8E8E93',
+                        chalk: '#F5F5F7'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #2c2c2e; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-obsidian text-chalk font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden">
+
+    <!-- ==================== ADMIN TOP BAR ==================== -->
+    <div id="admin-banner" class="hidden sticky top-0 z-50 bg-white text-black px-4 py-2.5 shadow-xl border-b border-neutral-300">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-bold">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                <span>وضع الأدمن مُفعّل (ADMIN MODE) — لك كامل الصلاحيات في الحذف والتعديل</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="openAdminDrawer('products')" class="bg-black text-white px-3 py-1.5 rounded-lg hover:bg-neutral-800 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>لوحة التحكم الشاملة</span>
+                </button>
+                <button onclick="logoutAdmin()" class="bg-neutral-200 text-black px-3 py-1.5 rounded-lg hover:bg-neutral-300 transition">
+                    خروج
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TOP ANNOUNCEMENT TICKER ==================== -->
+    <div class="bg-charcoal border-b border-white/10 text-[11px] sm:text-xs tracking-widest uppercase py-2 px-4 text-center font-mono text-neutral-300 flex items-center justify-between">
+        <span class="hidden sm:inline opacity-60">EST. 2025 // EGYPT</span>
+        <span id="site-announcement" class="mx-auto font-semibold">DROP 01: "CREATE YOUR OWN DIRECTION" — شحن مجاني للطلبات فوق 2500 EGP</span>
+        <span class="hidden sm:inline opacity-60">01 BINARY SERIES</span>
+    </div>
+
+    <!-- ==================== MAIN NAVIGATION ==================== -->
+    <header class="sticky top-0 z-40 bg-obsidian/85 backdrop-blur-md border-b border-white/10 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 bg-white text-black rounded-xl flex items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105">
+                    <svg viewBox="0 0 100 100" class="w-full h-full fill-current">
+                        <path d="M25 22 H68 L58 36 H34 C29 36 26 39 26 44 V62 L14 74 V40 C14 29 18 22 25 22 Z"/>
+                        <path d="M75 78 H32 L42 64 H66 C71 64 74 61 74 56 V38 L86 26 V60 C86 71 82 78 75 78 Z"/>
+                        <polygon points="88,12 93,17 12,88 7,83"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col text-left" dir="ltr">
+                    <span id="nav-brand-name" class="font-display font-extrabold text-xl sm:text-2xl tracking-tight leading-none text-white">∅ ONE<sup class="text-[10px] ml-0.5">TM</sup></span>
+                    <span class="text-[9px] font-mono tracking-[0.25em] text-neutral-400 uppercase mt-0.5">STREETWEAR</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-300">
+                <a href="#collection" class="hover:text-white transition">المجموعة الجديدة</a>
+                <a href="#manifesto" class="hover:text-white transition">هوية البراند</a>
+                <a href="#lookbook" class="hover:text-white transition">Lookbook</a>
+                <button onclick="openSizeGuideModal()" class="hover:text-white transition">دليل المقاسات العام</button>
+            </nav>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="handleAdminTrigger()" title="إدارة المتجر" class="p-2.5 rounded-xl text-neutral-500 hover:text-white hover:bg-white/5 transition">
+                    <i id="admin-lock-icon" class="fa-solid fa-lock text-sm"></i>
+                </button>
+
+                <button onclick="toggleCart(true)" class="relative flex items-center gap-2 bg-white text-black px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-neutral-200 transition active:scale-95">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="hidden sm:inline">الحقيبة</span>
+                    <span id="cart-badge" class="bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-mono">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="relative min-h-[85vh] flex items-center bg-grid-pattern border-b border-white/10 overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-neutral-700/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                
+                <div class="lg:col-span-6 space-y-6 text-right z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/15 text-xs font-mono tracking-widest text-neutral-300">
+                        <span class="w-2 h-2 rounded-full bg-white"></span>
+                        <span id="hero-tag">INDEPENDENT STREETWEAR // 01</span>
+                    </div>
+
+                    <h1 id="hero-title" class="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-white">
+                        CREATE YOUR OWN DIRECTION.
+                    </h1>
+
+                    <p id="hero-subtitle" class="text-neutral-400 text-base sm:text-lg max-w-xl leading-relaxed">
+                        تصميمات استثنائية مستوحاة من العمارة الحديثة والرموز الرقمية. خامات ثقيلة وقصّات Oversized صُممت خصيصاً لمن يرفض القوالب الجاهزة.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a href="#collection" id="hero-cta" class="bg-white text-black px-8 py-4 rounded-xl font-bold text-sm sm:text-base hover:bg-neutral-200 transition flex items-center gap-3 shadow-lg shadow-white/5">
+                            <span>تسوق المجموعة الآن</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        <a href="#manifesto" class="px-6 py-4 rounded-xl border border-white/20 text-white font-semibold text-sm sm:text-base hover:bg-white/5 transition">
+                            اكتشف فلسفة ∅ ONE
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 text-xs font-mono text-neutral-400">
+                        <div>
+                            <p class="text-white font-bold text-sm mb-0.5">450 GSM</p>
+                            <p>قطن مصري فاخر</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-bold text-sm mb-0.5">BOXY FIT</p>
+                            <p>قصّات أوفر سايز</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-bold text-sm mb-0.5">LIMITED</p>
+                            <p>إصدارات مرقّمة</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 relative">
+                    <div class="relative rounded-3xl overflow-hidden border border-white/15 bg-charcoal aspect-[4/5] sm:aspect-square lg:aspect-[4/5] shadow-2xl group">
+                        <img id="hero-image" 
+                             src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1000&q=85" 
+                             onerror="this.src='https://placehold.co/800x1000/121212/FFFFFF?text=%E2%88%85+ONE+STREETWEAR'"
+                             alt="∅ ONE Streetwear Campaign" 
+                             class="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition-transform duration-700">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+                        
+                        <div class="absolute top-5 left-5 right-5 flex justify-between items-center font-mono text-[11px] text-white/80">
+                            <span class="bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">∅ ONE™ ARCHIVE</span>
+                            <span class="bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">NOT MADE TO FIT IN</span>
+                        </div>
+
+                        <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+                            <div>
+                                <p class="font-mono text-xs text-neutral-400">FEATURED PIECE // 01</p>
+                                <p class="font-display font-bold text-xl text-white">BINARY CODE HEAVY HOODIE</p>
+                            </div>
+                            <a href="#collection" class="w-11 h-11 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PRODUCTS COLLECTION SECTION ==================== -->
+    <section id="collection" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+                <span class="font-mono text-xs tracking-widest text-neutral-400 uppercase block mb-2">// DROP 01 COLLECTION</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">أحدث الإصدارات</h2>
+            </div>
+
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="category-filters">
+                <button onclick="filterProducts('all')" data-cat="all" class="filter-btn active px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-black transition whitespace-nowrap">
+                    الكل
+                </button>
+                <button onclick="filterProducts('hoodies')" data-cat="hoodies" class="filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-charcoal text-neutral-300 border border-white/10 hover:border-white/30 transition whitespace-nowrap">
+                    هوديز (Hoodies)
+                </button>
+                <button onclick="filterProducts('tees')" data-cat="tees" class="filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-charcoal text-neutral-300 border border-white/10 hover:border-white/30 transition whitespace-nowrap">
+                    تيشيرتات (Oversized Tees)
+                </button>
+                <button onclick="filterProducts('pants')" data-cat="pants" class="filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-charcoal text-neutral-300 border border-white/10 hover:border-white/30 transition whitespace-nowrap">
+                    بناطيل (Cargo & Sweatpants)
+                </button>
+            </div>
+        </div>
+
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Dynamically injected -->
+        </div>
+    </section>
+
+    <!-- ==================== BRAND MANIFESTO ==================== -->
+    <section id="manifesto" class="py-20 bg-charcoal border-y border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl bg-obsidian border border-white/10 p-8 sm:p-14 text-center max-w-4xl mx-auto relative overflow-hidden">
+                <div class="font-mono text-xs tracking-[0.3em] text-neutral-400 uppercase mb-4">∅ ONE — BRAND IDENTITY</div>
+                <h2 id="manifesto-headline" class="font-display font-extrabold text-3xl sm:text-5xl text-white mb-4 tracking-tight">
+                    NOT MADE TO FIT IN.
+                </h2>
+                <p id="manifesto-sub" class="font-mono text-sm sm:text-base text-neutral-400 tracking-widest uppercase mb-8">
+                    DIFFERENT MINDS. ONE IDENTITY. AN IDENTITY WITHOUT LIMITS.
+                </p>
+                <p id="manifesto-body" class="text-neutral-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto mb-10">
+                    في ∅ ONE نؤمن أن الملابس ليست مجرد قماش، بل هي موقف وهوية بصرية. كل قطعة يتم تصميمها بعناية فائقة لتجمع بين البساطة المعمارية والجرأة.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center border-t border-white/10 pt-8">
+                    <div class="p-4 rounded-2xl bg-charcoal/60 border border-white/5">
+                        <i class="fa-solid fa-globe text-xl text-white mb-2"></i>
+                        <h3 class="font-bold text-sm text-white">PREMIUM STREETWEAR</h3>
+                        <p class="text-xs text-neutral-400 mt-1">تقفيل وخامات بمعايير عالمية</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-charcoal/60 border border-white/5">
+                        <i class="fa-solid fa-microchip text-xl text-white mb-2"></i>
+                        <h3 class="font-bold text-sm text-white">INSPIRED BY TECHNOLOGY</h3>
+                        <p class="text-xs text-neutral-400 mt-1">تصاميم مستلهمة من العالم الرقمي</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-charcoal/60 border border-white/5">
+                        <i class="fa-solid fa-infinity text-xl text-white mb-2"></i>
+                        <h3 class="font-bold text-sm text-white">BUILT FOR MORE</h3>
+                        <p class="text-xs text-neutral-400 mt-1">قطع أساسية تعيش طويلاً</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LOOKBOOK ==================== -->
+    <section id="lookbook" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-10">
+            <div>
+                <span class="font-mono text-xs text-neutral-400 uppercase">// VISUAL ARCHIVE</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">LOOKBOOK 01</h2>
+            </div>
+            <span class="font-mono text-xs text-neutral-500">WEAR THE CODE</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] relative group">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Lookbook 1" class="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition duration-500">
+                <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10">01 // MONOCHROME</div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] relative group">
+                <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=800&q=80" alt="Lookbook 2" class="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition duration-500">
+                <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10">02 // BRUTALIST</div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] relative group">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="Lookbook 3" class="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition duration-500">
+                <div class="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10">03 // LOST IN SPACES</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FLOATING WHATSAPP ASSISTANCE BUTTON ==================== -->
+    <a id="whatsapp-float-btn" href="https://wa.me/201000000000" target="_blank" class="fixed bottom-6 left-6 z-40 bg-emerald-600 hover:bg-emerald-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl transition-all duration-300 hover:scale-110 active:scale-95 group" title="تواصل معنا عبر واتساب">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="absolute right-16 bg-obsidian text-white border border-white/15 px-3 py-1.5 rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition whitespace-pointer pointer-events-none shadow-xl">
+            مساعدة العملاء (واتساب)
+        </span>
+    </a>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-charcoal border-t border-white/10 pt-14 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
+                <div>
+                    <div class="flex items-center gap-2.5 mb-4" dir="ltr">
+                        <span class="font-display font-extrabold text-2xl text-white">∅ ONE™</span>
+                    </div>
+                    <p class="text-neutral-400 text-sm leading-relaxed max-w-xs">
+                        براند ملابس ستريت وير مستقل. نصنع قطعاً تعبر عن شخصيتك بدون قيود.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4 text-sm">روابط سريعة</h4>
+                    <ul class="space-y-2.5 text-sm text-neutral-400">
+                        <li><a href="#collection" class="hover:text-white transition">المتجر</a></li>
+                        <li><button onclick="openSizeGuideModal()" class="hover:text-white transition">جدول المقاسات العام</button></li>
+                        <li><a href="#manifesto" class="hover:text-white transition">عن البراند</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4 text-sm">تواصل معنا</h4>
+                    <p id="footer-contact" class="text-sm text-neutral-400 mb-3">Instagram: @0one.eg | WhatsApp: +20 100 000 0000</p>
+                    <div class="flex items-center gap-3">
+                        <a href="#" class="w-10 h-10 rounded-xl bg-obsidian border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-obsidian border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition"><i class="fa-brands fa-tiktok"></i></a>
+                        <a id="footer-wa-icon" href="https://wa.me/201000000000" target="_blank" class="w-10 h-10 rounded-xl bg-obsidian border border-white/10 flex items-center justify-center text-white hover:bg-emerald-600 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
+                <p>© 2025 ∅ ONE™ CLOTHING CO. ALL RIGHTS RESERVED.</p>
+                <button onclick="handleAdminTrigger()" class="text-neutral-600 hover:text-neutral-300 transition font-mono">
+                    [ADMIN ACCESS]
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== PRODUCT DETAILS MODAL ==================== -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-charcoal border border-white/15 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl animate-fadeIn max-h-[90vh] flex flex-col">
+            <div class="grid grid-cols-1 md:grid-cols-2 overflow-y-auto">
+                <div class="aspect-square md:aspect-auto bg-obsidian relative">
+                    <img id="modal-prod-img" src="" alt="" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start gap-2">
+                            <span id="modal-prod-cat" class="text-xs font-mono uppercase text-neutral-400">CATEGORY</span>
+                            <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-white/10 text-white hover:bg-white hover:text-black transition flex items-center justify-center">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <h3 id="modal-prod-title" class="font-display font-bold text-2xl text-white mt-2">Product Name</h3>
+                        <p id="modal-prod-price" class="font-mono text-xl font-bold text-white mt-2">1200 EGP</p>
+                        <p id="modal-prod-desc" class="text-sm text-neutral-400 mt-4 leading-relaxed">Description.</p>
+
+                        <div id="modal-extra-details-wrapper" class="mt-4 hidden bg-obsidian/60 p-3 rounded-xl border border-white/10">
+                            <h4 class="text-xs font-bold text-white mb-1">// تفاصيل ومواصفات إضافية</h4>
+                            <p id="modal-prod-extra-details" class="text-xs text-neutral-300 whitespace-pre-line leading-relaxed"></p>
+                        </div>
+
+                        <div class="mt-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold text-neutral-300">اختر المقاس:</span>
+                                <button onclick="openSizeGuideModal()" class="text-xs underline text-neutral-400 hover:text-white">جدول المقاسات العام</button>
+                            </div>
+                            <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-white/10">
+                            <h4 class="text-xs font-bold text-white mb-2">// دليل مقاسات القطعة</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-center text-[11px] font-mono border-collapse">
+                                    <thead>
+                                        <tr class="bg-obsidian text-white border-b border-white/15">
+                                            <th class="py-2 px-1">مقاس</th>
+                                            <th class="py-2 px-1">عرض الصدر</th>
+                                            <th class="py-2 px-1">الطول</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="modal-size-chart-body" class="divide-y divide-white/10 text-neutral-300"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-4 border-t border-white/10">
+                        <button id="modal-add-btn" onclick="confirmAddToCart()" class="w-full bg-white text-black py-3.5 rounded-xl font-bold text-sm hover:bg-neutral-200 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span>أضف إلى الحقيبة</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SHOPPING CART DRAWER ==================== -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+        <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/75 backdrop-blur-sm"></div>
+        <div class="absolute top-0 left-0 bottom-0 w-full max-w-md bg-charcoal border-r border-white/15 flex flex-col justify-between p-6 shadow-2xl">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                <h3 class="font-display font-bold text-xl text-white flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>حقيبة التسوق</span>
+                </h3>
+                <button onclick="toggleCart(false)" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white hover:text-black transition flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="flex-1 overflow-y-auto py-4 space-y-4"></div>
+
+            <div class="pt-4 border-t border-white/10 space-y-3">
+                <div class="space-y-2 bg-obsidian p-3.5 rounded-2xl border border-white/10">
+                    <div class="flex justify-between items-center text-xs text-neutral-400">
+                        <span>إجمالي المنتجات:</span>
+                        <span id="cart-subtotal" class="font-mono text-white">0 EGP</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs text-neutral-400">
+                        <span>مصاريف الشحن (<span id="selected-governorate-label">اختر المحافظة</span>):</span>
+                        <span id="shipping-cost-display" class="font-mono text-white">0 EGP</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm font-bold pt-2 border-t border-white/10">
+                        <span class="text-neutral-200">الإجمالي النهائي:</span>
+                        <span id="cart-total" class="font-mono text-xl text-white">0 EGP</span>
+                    </div>
+                </div>
+
+                <div id="checkout-fields" class="space-y-2.5 hidden">
+                    <input type="text" id="cust-name" placeholder="الاسم بالكامل" class="w-full bg-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-white focus:outline-none">
+                    <input type="tel" id="cust-phone" placeholder="رقم الموبايل (واتساب)" class="w-full bg-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-white focus:outline-none">
+                    
+                    <div>
+                        <label class="text-[11px] text-neutral-400 block mb-1">اختر المحافظة للشحن:</label>
+                        <select id="cust-governorate" onchange="onGovernorateChange()" class="w-full bg-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-white focus:outline-none"></select>
+                    </div>
+
+                    <input type="text" id="cust-address" placeholder="العنوان بالتفصيل (الشارع، الحارة، الرقم)" class="w-full bg-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-white focus:outline-none">
+                </div>
+
+                <button id="checkout-btn" onclick="processCheckout()" class="w-full bg-white text-black py-3.5 rounded-xl font-bold text-sm hover:bg-neutral-200 transition">
+                    إتمام الطلب الآن
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ADMIN LOGIN MODAL ==================== -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-charcoal border border-white/20 rounded-3xl max-w-sm w-full p-7 shadow-2xl">
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-white text-black mx-auto flex items-center justify-center text-lg mb-3">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="font-display font-bold text-xl text-white">دخول الأدمن فقط</h3>
+                <p class="text-xs text-neutral-400 mt-1">أدخل كلمة المرور السرية للتحكم الكامل في المتجر</p>
+            </div>
+
+            <form onsubmit="submitAdminLogin(event)" class="space-y-4">
+                <div>
+                    <input type="password" id="admin-password-input" placeholder="كلمة المرور..." required
+                           class="w-full bg-obsidian border border-white/20 rounded-xl px-4 py-3 text-center text-white tracking-widest focus:border-white focus:outline-none">
+                    <p class="text-[11px] text-neutral-500 text-center mt-2 font-mono">كلمة المرور الافتراضية: <span class="text-neutral-300 select-all">0one2025</span></p>
+                </div>
+                <div class="flex gap-2">
+                    <button type="submit" class="flex-1 bg-white text-black py-3 rounded-xl font-bold text-sm hover:bg-neutral-200 transition">دخول</button>
+                    <button type="button" onclick="closeAdminLogin()" class="px-4 py-3 rounded-xl bg-obsidian border border-white/15 text-neutral-300 text-sm">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== FULL ADMIN CMS CONTROL PANEL DRAWER ==================== -->
+    <div id="admin-drawer" class="fixed inset-0 z-50 hidden">
+        <div onclick="closeAdminDrawer()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="absolute top-0 right-0 bottom-0 w-full max-w-2xl bg-charcoal border-l border-white/15 flex flex-col shadow-2xl">
+            
+            <div class="p-6 border-b border-white/10 flex items-center justify-between bg-obsidian">
+                <div>
+                    <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400">● AUTHENTICATED OWNER</span>
+                    <h2 class="font-display font-extrabold text-xl text-white">لوحة تحكم ∅ ONE الكاملة</h2>
+                </div>
+                <button onclick="closeAdminDrawer()" class="w-9 h-9 rounded-xl bg-white/10 text-white hover:bg-white hover:text-black transition flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="flex border-b border-white/10 bg-obsidian/60 px-4 gap-2 overflow-x-auto no-scrollbar">
+                <button onclick="switchAdminTab('products')" id="tab-btn-products" class="admin-tab-btn py-3.5 px-4 text-xs sm:text-sm font-bold border-b-2 border-white text-white whitespace-nowrap">
+                    <i class="fa-solid fa-shirt ml-1.5"></i>المنتجات
+                </button>
+                <button onclick="switchAdminTab('shipping')" id="tab-btn-shipping" class="admin-tab-btn py-3.5 px-4 text-xs sm:text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white whitespace-nowrap">
+                    <i class="fa-solid fa-truck ml-1.5"></i>الشحن
+                </button>
+                <button onclick="switchAdminTab('sizes')" id="tab-btn-sizes" class="admin-tab-btn py-3.5 px-4 text-xs sm:text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white whitespace-nowrap">
+                    <i class="fa-solid fa-ruler ml-1.5"></i>جدول المقاسات العام
+                </button>
+                <button onclick="switchAdminTab('content')" id="tab-btn-content" class="admin-tab-btn py-3.5 px-4 text-xs sm:text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white whitespace-nowrap">
+                    <i class="fa-solid fa-pen-to-square ml-1.5"></i>النصوص والواجهة
+                </button>
+                <button onclick="switchAdminTab('orders')" id="tab-btn-orders" class="admin-tab-btn py-3.5 px-4 text-xs sm:text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white whitespace-nowrap">
+                    <i class="fa-solid fa-receipt ml-1.5"></i>الطلبات (<span id="orders-count-badge">0</span>)
+                </button>
+                <button onclick="switchAdminTab('security')" id="tab-btn-security" class="admin-tab-btn py-3.5 px-4 text-xs sm:text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white whitespace-nowrap">
+                    <i class="fa-solid fa-key ml-1.5"></i>الأمان
+                </button>
+            </div>
+
+            <!-- Admin Body -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                
+                <!-- TAB 1: PRODUCTS -->
+                <div id="admin-tab-products" class="space-y-6">
+                    <div class="bg-obsidian border border-white/10 rounded-2xl p-5 space-y-4">
+                        <h3 id="form-prod-heading" class="font-bold text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-plus-circle"></i>
+                            <span>إضافة منتج جديد أو تعديل</span>
+                        </h3>
+                        <input type="hidden" id="edit-prod-id">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-xs text-neutral-400 block mb-1">اسم القطعة</label>
+                                <input type="text" id="prod-name-input" placeholder="01 Binary Heavy Hoodie" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="text-xs text-neutral-400 block mb-1">السعر (EGP)</label>
+                                <input type="number" id="prod-price-input" placeholder="1450" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-xs text-neutral-400 block mb-1">القسم</label>
+                                <select id="prod-cat-input" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                                    <option value="hoodies">هوديز (Hoodies)</option>
+                                    <option value="tees">تيشيرتات (Oversized Tees)</option>
+                                    <option value="pants">بناطيل (Pants)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs text-neutral-400 block mb-1">شارة خاصة (اختياري)</label>
+                                <input type="text" id="prod-badge-input" placeholder="NEW DROP" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">صورة المنتج (رابط أو رفع من جهازك/موبايلك)</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="prod-img-input" placeholder="https://..." class="flex-1 bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                                <label class="cursor-pointer bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 whitespace-nowrap">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <span>رفع صورة</span>
+                                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'prod-img-input')" class="hidden">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">المقاسات المتاحة (افصل بفاصلة)</label>
+                            <input type="text" id="prod-sizes-input" value="S, M, L, XL" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white font-mono">
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">الوصف العام</label>
+                            <textarea id="prod-desc-input" rows="2" placeholder="وصف المنتج..." class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-emerald-400 block mb-1 font-bold">✍️ تفاصيل ومواصفات إضافية (اكتبها براحتك):</label>
+                            <textarea id="prod-extra-details-input" rows="3" placeholder="- قطن 100% ثقيل الوزن&#10;- طباعة بارزة 3D" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-emerald-400 block mb-1 font-bold">📐 جدول مقاسات هذه القطعة:</label>
+                            <textarea id="prod-size-chart-input" rows="3" placeholder="S: الصدر 58 سم | الطول 69 سم&#10;M: الصدر 61 سم | الطول 72 سم" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white font-mono"></textarea>
+                        </div>
+
+                        <div class="flex gap-2 pt-2">
+                            <button onclick="saveProductFromAdmin()" class="flex-1 bg-white text-black py-3 rounded-xl font-bold text-sm hover:bg-neutral-200 transition">
+                                حفظ ونشر القطعة
+                            </button>
+                            <button id="cancel-edit-btn" onclick="resetProductForm()" class="hidden px-4 py-3 rounded-xl bg-neutral-800 text-neutral-300 text-sm">
+                                إلغاء
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-sm text-neutral-300 mb-3">المنتجات الحالية (إدارة وحذف):</h4>
+                        <div id="admin-products-list" class="space-y-3"></div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: SHIPPING -->
+                <div id="admin-tab-shipping" class="hidden space-y-5">
+                    <div class="bg-obsidian border border-white/10 rounded-2xl p-5 space-y-4">
+                        <h3 class="font-bold text-white text-base">إدارة المحافظات وأسعار الشحن</h3>
+                        
+                        <div class="flex gap-2 bg-charcoal p-3 rounded-xl border border-white/10">
+                            <input type="text" id="new-gov-name" placeholder="اسم المحافظة" class="flex-1 bg-obsidian border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+                            <input type="number" id="new-gov-price" placeholder="السعر EGP" class="w-28 bg-obsidian border border-white/15 rounded-xl px-3 py-2 text-xs text-white">
+                            <button onclick="addNewGovernorate()" class="bg-white text-black px-4 py-2 rounded-xl text-xs font-bold">إضافة</button>
+                        </div>
+
+                        <div id="admin-governorates-list" class="space-y-2.5"></div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: GENERAL SIZE CHART -->
+                <div id="admin-tab-sizes" class="hidden space-y-5">
+                    <div class="bg-obsidian border border-white/10 rounded-2xl p-5 space-y-4">
+                        <h3 class="font-bold text-white text-base">تعديل جدول المقاسات العام (Size Guide)</h3>
+                        <p class="text-xs text-neutral-400">يمكنك تعديل الأبعاد والمقاسات التي تظهر في جدول المقاسات العام للعملاء.</p>
+                        
+                        <div id="admin-size-guide-rows" class="space-y-3">
+                            <!-- Injected dynamically -->
+                        </div>
+                        <button onclick="addNewSizeGuideRow()" class="w-full bg-white/10 hover:bg-white/20 text-white py-2.5 rounded-xl text-xs font-bold transition">
+                            + إضافة مقاس جديد للجدول العام
+                        </button>
+                        <button onclick="saveGeneralSizeGuide()" class="w-full bg-white text-black py-3 rounded-xl font-bold text-sm mt-4">
+                            حفظ جدول المقاسات العام
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TAB 4: SITE CONTENT & HERO IMAGE -->
+                <div id="admin-tab-content" class="hidden space-y-5">
+                    <div class="bg-obsidian border border-white/10 rounded-2xl p-5 space-y-4">
+                        <h3 class="font-bold text-white text-base">تعديل نصوص وصور الواجهة (Hero & Info)</h3>
+                        
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">رقم هاتف المساعدة (واتساب)</label>
+                            <input type="text" id="cms-whatsapp" placeholder="201000000000" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white font-mono">
+                            <p class="text-[10px] text-neutral-500 mt-0.5">اكتب الرقم الدولي بدون علامة + (مثال: 201012345678)</p>
+                        </div>
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">صورة الواجهة الرئيسية (Hero Image URL أو رفع)</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="cms-hero-img-input" class="flex-1 bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                                <label class="cursor-pointer bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 whitespace-nowrap">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <span>رفع صورة</span>
+                                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'cms-hero-img-input')" class="hidden">
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">شريط الإعلانات العلوي</label>
+                            <input type="text" id="cms-announcement" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">العنوان الرئيسي (Hero Title)</label>
+                            <input type="text" id="cms-hero-title" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">الوصف</label>
+                            <textarea id="cms-hero-subtitle" rows="2" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white"></textarea>
+                        </div>
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">بيانات التواصل (الفوتر)</label>
+                            <input type="text" id="cms-footer-contact" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                        </div>
+                        <button onclick="saveSiteContent()" class="w-full bg-white text-black py-3 rounded-xl font-bold text-sm hover:bg-neutral-200 transition">
+                            حفظ التعديلات
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TAB 5: ORDERS -->
+                <div id="admin-tab-orders" class="hidden space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-white text-base">طلبات العملاء</h3>
+                        <button onclick="clearAllOrders()" class="text-xs text-red-400 hover:underline">مسح السجل</button>
+                    </div>
+                    <div id="admin-orders-list" class="space-y-3"></div>
+                </div>
+
+                <!-- TAB 6: SECURITY -->
+                <div id="admin-tab-security" class="hidden space-y-4">
+                    <div class="bg-obsidian border border-white/10 rounded-2xl p-5 space-y-4">
+                        <h3 class="font-bold text-white text-base">تغيير كلمة مرور الأدمن</h3>
+                        <div>
+                            <label class="text-xs text-neutral-400 block mb-1">كلمة المرور الجديدة</label>
+                            <input type="password" id="new-admin-pass" class="w-full bg-charcoal border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white">
+                        </div>
+                        <button onclick="updateAdminPassword()" class="bg-white text-black px-6 py-3 rounded-xl font-bold text-sm">تحديث</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SIZE GUIDE MODAL ==================== -->
+    <div id="size-guide-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-charcoal border border-white/15 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-display font-bold text-xl text-white">جدول المقاسات العام (OVERSIZED FIT)</h3>
+                <button onclick="closeSizeGuideModal()" class="w-8 h-8 rounded-full bg-white/10 text-white hover:bg-white hover:text-black flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p class="text-xs text-neutral-400 mb-4">جميع قطع ∅ ONE مصممة بقصّة Boxy Oversized مريحة.</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-center text-xs font-mono border-collapse">
+                    <thead>
+                        <tr class="bg-obsidian text-white border-b border-white/15">
+                            <th class="py-3 px-2">SIZE</th>
+                            <th class="py-3 px-2">CHEST (CM)</th>
+                            <th class="py-3 px-2">LENGTH (CM)</th>
+                            <th class="py-3 px-2">SHOULDER (CM)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="general-size-guide-tbody" class="divide-y divide-white/10 text-neutral-300">
+                        <!-- Injected dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 hidden bg-white text-black px-5 py-3.5 rounded-2xl shadow-2xl font-bold text-sm flex items-center gap-3 transition-all">
+        <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+        <span id="toast-message">تم الحفظ بنجاح</span>
+    </div>
+
+    <!-- ==================== SCRIPT LOGIC ==================== -->
+    <script>
+        const DEFAULT_STORE_DATA = {
+            adminPassword: '0one2025',
+            whatsappNumber: '201000000000',
+            siteContent: {
+                announcement: 'DROP 01: "CREATE YOUR OWN DIRECTION" — شحن مجاني للطلبات فوق 2500 EGP',
+                heroTitle: 'CREATE YOUR OWN DIRECTION.',
+                heroSubtitle: 'تصميمات استثنائية مستوحاة من العمارة الحديثة والرموز الرقمية. خامات ثقيلة وقصّات Oversized صُممت خصيصاً لمن يرفض القوالب الجاهزة.',
+                heroImage: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1000&q=85',
+                manifestoHeadline: 'NOT MADE TO FIT IN.',
+                footerContact: 'Instagram: @0one.eg | WhatsApp: +20 100 000 0000'
+            },
+            generalSizeGuide: [
+                { size: 'S', chest: '58', length: '69', shoulder: '56' },
+                { size: 'M', chest: '61', length: '72', shoulder: '59' },
+                { size: 'L', chest: '64', length: '75', shoulder: '62' },
+                { size: 'XL', chest: '67', length: '78', shoulder: '65' }
+            ],
+            governorates: [
+                { name: 'القاهرة / الجيزة', price: 60 },
+                { name: 'الإسكندرية', price: 75 },
+                { name: 'الدلتا (المنصورة، طنطا، الزقازيق، إلخ)', price: 80 },
+                { name: 'القنال (السويس، الإسماعيلية، بورسعيد)', price: 85 },
+                { name: 'الصعيد (أسيوط، سوهاج، قنا، أسوان، إلخ)', price: 100 }
+            ],
+            products: [
+                {
+                    id: 'p1',
+                    name: '01 BINARY CODE HEAVY HOODIE',
+                    price: 1550,
+                    category: 'hoodies',
+                    badge: 'BEST SELLER',
+                    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=85',
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    description: 'هودي أسود فاحم بوزن 450 GSM مع طباعة رقمية بتصميم 01 Binary Code.',
+                    extraDetails: '- قطن مصري 100% ثقيل الوزن 450 GSM\n- معالج ضد الانكماش والوبر\n- طباعة رقمية بارزة',
+                    sizeChart: 'S: الصدر 58 سم | الطول 69 سم\nM: الصدر 61 سم | الطول 72 سم\nL: الصدر 64 سم | الطول 75 سم\nXL: الصدر 67 سم | الطول 78 سم'
+                },
+                {
+                    id: 'p2',
+                    name: 'LOST BETWEEN SPACES OVERSIZED TEE',
+                    price: 890,
+                    category: 'tees',
+                    badge: 'LIMITED DROP',
+                    image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=85',
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    description: 'تيشيرت أوفر سايز بوزن 280 GSM قطن مصري 100% مع جرافيك معماري.',
+                    extraDetails: '- قطن مسامي ممتاز للطقس المعتدل\n- قصّة Boxy Fit واسعة',
+                    sizeChart: 'S: الصدر 54 سم | الطول 70 سم\nM: الصدر 57 سم | الطول 73 سم\nL: الصدر 60 سم | الطول 76 سم'
+                },
+                {
+                    id: 'p3',
+                    name: '01 VARSITY ARCHIVE HOODIE',
+                    price: 1600,
+                    category: 'hoodies',
+                    badge: 'NEW',
+                    image: 'https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?auto=format&fit=crop&w=800&q=85',
+                    sizes: ['M', 'L', 'XL'],
+                    description: 'تصميم جريء برقم 01 بارز على الظهر باللون الأبيض الناصع.',
+                    extraDetails: '- بطانة داخلية ناعمة Fleece\n- ياقة متينة',
+                    sizeChart: 'M: الصدر 61 سم | الطول 72 سم\nL: الصدر 64 سم | الطول 75 سم'
+                }
+            ],
+            orders: []
+        };
+
+        let storeState = JSON.parse(JSON.stringify(DEFAULT_STORE_DATA));
+        let isAdminLoggedIn = false;
+        let currentCategoryFilter = 'all';
+        let cart = [];
+        let selectedModalProduct = null;
+        let selectedModalSize = null;
+
+        window.onload = function() {
+            renderSiteContent();
+            renderProducts();
+            updateCartUI();
+            updateWhatsAppLinks();
+        };
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => { toast.classList.add('hidden'); }, 3200);
+        }
+
+        function updateWhatsAppLinks() {
+            const num = storeState.whatsappNumber || '201000000000';
+            const url = `https://wa.me/${num}`;
+            document.getElementById('whatsapp-float-btn').href = url;
+            document.getElementById('footer-wa-icon').href = url;
+        }
+
+        function renderSiteContent() {
+            const c = storeState.siteContent;
+            document.getElementById('site-announcement').innerText = c.announcement;
+            document.getElementById('hero-title').innerText = c.heroTitle;
+            document.getElementById('hero-subtitle').innerText = c.heroSubtitle;
+            document.getElementById('hero-image').src = c.heroImage;
+            document.getElementById('manifesto-headline').innerText = c.manifestoHeadline;
+            document.getElementById('footer-contact').innerText = c.footerContact;
+            updateWhatsAppLinks();
+        }
+
+        function filterProducts(cat) {
+            currentCategoryFilter = cat;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = 'filter-btn active px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-black transition whitespace-nowrap';
+                } else {
+                    btn.className = 'filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-charcoal text-neutral-300 border border-white/10 hover:border-white/30 transition whitespace-nowrap';
+                }
+            });
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const filtered = currentCategoryFilter === 'all' 
+                ? storeState.products 
+                : storeState.products.filter(p => p.category === currentCategoryFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-neutral-500">لا توجد منتجات في هذا القسم حالياً.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(prod => `
+                <div class="group bg-charcoal border border-white/10 rounded-3xl overflow-hidden flex flex-col justify-between hover:border-white/30 transition-all duration-300">
+                    <div class="relative aspect-[4/5] bg-obsidian overflow-hidden cursor-pointer" onclick="openProductModal('${prod.id}')">
+                        <img src="${prod.image}" 
+                             onerror="this.src='https://placehold.co/600x750/121212/FFFFFF?text=%E2%88%85+ONE'"
+                             alt="${prod.name}" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        
+                        ${prod.badge ? `
+                            <span class="absolute top-4 right-4 bg-white text-black text-[10px] font-mono font-bold px-3 py-1 rounded-full tracking-wider uppercase shadow-md">
+                                ${prod.badge}
+                            </span>
+                        ` : ''}
+
+                        ${isAdminLoggedIn ? `
+                            <div class="absolute top-4 left-4 flex gap-1.5">
+                                <button onclick="event.stopPropagation(); editProductFromCard('${prod.id}')" 
+                                        class="bg-emerald-500 text-black text-xs font-bold px-3 py-1.5 rounded-xl shadow-lg hover:bg-emerald-400 transition flex items-center gap-1">
+                                    <i class="fa-solid fa-pen"></i> تعديل
+                                </button>
+                                <button onclick="event.stopPropagation(); deleteProduct('${prod.id}')" 
+                                        class="bg-red-600 text-white text-xs font-bold p-2 rounded-xl shadow-lg hover:bg-red-500 transition" title="حذف القطعة">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 onclick="openProductModal('${prod.id}')" class="font-display font-bold text-lg text-white cursor-pointer hover:underline">${prod.name}</h3>
+                            <p class="text-xs text-neutral-400 mt-1.5 line-clamp-2">${prod.description}</p>
+                        </div>
+
+                        <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="font-mono font-bold text-lg text-white">${prod.price} <span class="text-xs text-neutral-400">EGP</span></span>
+                            <button onclick="openProductModal('${prod.id}')" class="bg-white/10 hover:bg-white hover:text-black text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                                <span>التفاصيل والمقاسات</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Product Modal
+        function openProductModal(id) {
+            const prod = storeState.products.find(p => p.id === id);
+            if (!prod) return;
+            selectedModalProduct = prod;
+            selectedModalSize = prod.sizes[0] || 'L';
+
+            document.getElementById('modal-prod-img').src = prod.image;
+            document.getElementById('modal-prod-cat').innerText = `∅ ONE // ${prod.category.toUpperCase()}`;
+            document.getElementById('modal-prod-title').innerText = prod.name;
+            document.getElementById('modal-prod-price').innerText = `${prod.price} EGP`;
+            document.getElementById('modal-prod-desc').innerText = prod.description;
+
+            const extraWrapper = document.getElementById('modal-extra-details-wrapper');
+            const extraText = document.getElementById('modal-prod-extra-details');
+            if (prod.extraDetails && prod.extraDetails.trim() !== '') {
+                extraText.innerText = prod.extraDetails;
+                extraWrapper.classList.remove('hidden');
+            } else {
+                extraWrapper.classList.add('hidden');
+            }
+
+            const chartBody = document.getElementById('modal-size-chart-body');
+            if (prod.sizeChart && prod.sizeChart.trim() !== '') {
+                const lines = prod.sizeChart.split('\n');
+                chartBody.innerHTML = lines.map(line => {
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        const sName = parts[0].trim();
+                        const sDims = parts[1].trim();
+                        const dimParts = sDims.split('|');
+                        const chest = dimParts[0] ? dimParts[0].trim() : sDims;
+                        const length = dimParts[1] ? dimParts[1].trim() : '-';
+                        return `<tr class="border-b border-white/5"><td class="py-2 font-bold text-white">${sName}</td><td class="py-2">${chest}</td><td class="py-2">${length}</td></tr>`;
+                    }
+                    return `<tr class="border-b border-white/5"><td colspan="3" class="py-2 text-white">${line}</td></tr>`;
+                }).join('');
+            } else {
+                chartBody.innerHTML = `<tr><td colspan="3" class="py-3 text-neutral-500">متوفر بقصّة Oversized مريحة وفق الجدول العام.</td></tr>`;
+            }
+
+            renderModalSizes();
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function renderModalSizes() {
+            const container = document.getElementById('modal-sizes');
+            container.innerHTML = selectedModalProduct.sizes.map(size => `
+                <button onclick="selectSize('${size}')" 
+                        class="px-4 py-2 rounded-xl font-mono text-xs font-bold border transition ${selectedModalSize === size ? 'bg-white text-black border-white' : 'bg-obsidian text-neutral-300 border-white/15 hover:border-white/40'}">
+                    ${size}
+                </button>
+            `).join('');
+        }
+
+        function selectSize(size) {
+            selectedModalSize = size;
+            renderModalSizes();
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function confirmAddToCart() {
+            if (!selectedModalProduct) return;
+            const existingIndex = cart.findIndex(item => item.id === selectedModalProduct.id && item.size === selectedModalSize);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({
+                    id: selectedModalProduct.id,
+                    name: selectedModalProduct.name,
+                    price: selectedModalProduct.price,
+                    image: selectedModalProduct.image,
+                    size: selectedModalSize,
+                    qty: 1
+                });
+            }
+            closeProductModal();
+            updateCartUI();
+            toggleCart(true);
+            showToast('تمت إضافة القطعة إلى الحقيبة');
+        }
+
+        function toggleCart(open) {
+            const drawer = document.getElementById('cart-drawer');
+            if (open) {
+                populateGovernoratesDropdown();
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        function populateGovernoratesDropdown() {
+            const select = document.getElementById('cust-governorate');
+            select.innerHTML = storeState.governorates.map((gov, idx) => `
+                <option value="${idx}">${gov.name} — (${gov.price} EGP)</option>
+            `).join('');
+            onGovernorateChange();
+        }
+
+        function getSelectedShippingCost() {
+            const select = document.getElementById('cust-governorate');
+            if (!select || select.value === '') return storeState.governorates[0] ? storeState.governorates[0].price : 60;
+            const idx = Number(select.value);
+            return storeState.governorates[idx] ? storeState.governorates[idx].price : 60;
+        }
+
+        function onGovernorateChange() {
+            const select = document.getElementById('cust-governorate');
+            if (!select || storeState.governorates.length === 0) return;
+            const idx = Number(select.value);
+            const gov = storeState.governorates[idx];
+            if (gov) {
+                document.getElementById('selected-governorate-label').innerText = gov.name;
+                document.getElementById('shipping-cost-display').innerText = `${gov.price} EGP`;
+            }
+            updateCartUI();
+        }
+
+        function updateCartQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const shipping = cart.length > 0 ? getSelectedShippingCost() : 0;
+            const finalTotal = subtotal + shipping;
+
+            document.getElementById('cart-badge').innerText = totalItems;
+            document.getElementById('cart-subtotal').innerText = `${subtotal} EGP`;
+            document.getElementById('shipping-cost-display').innerText = `${shipping} EGP`;
+            document.getElementById('cart-total').innerText = `${finalTotal} EGP`;
+
+            const container = document.getElementById('cart-items-container');
+            const checkoutFields = document.getElementById('checkout-fields');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-neutral-500 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-3xl opacity-40"></i>
+                        <p class="text-sm">حقيبة التسوق فارغة حالياً</p>
+                    </div>
+                `;
+                checkoutFields.classList.add('hidden');
+            } else {
+                checkoutFields.classList.remove('hidden');
+                container.innerHTML = cart.map((item, idx) => `
+                    <div class="flex gap-3 bg-obsidian p-3 rounded-2xl border border-white/10 items-center">
+                        <img src="${item.image}" class="w-16 h-20 object-cover rounded-xl">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-xs text-white">${item.name}</h4>
+                            <p class="text-[11px] font-mono text-neutral-400 mt-0.5">SIZE: ${item.size} | ${item.price} EGP</p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="updateCartQty(${idx}, -1)" class="w-6 h-6 rounded-lg bg-charcoal border border-white/15 text-xs">-</button>
+                                <span class="text-xs font-mono font-bold">${item.qty}</span>
+                                <button onclick="updateCartQty(${idx}, 1)" class="w-6 h-6 rounded-lg bg-charcoal border border-white/15 text-xs">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function processCheckout() {
+            if (cart.length === 0) {
+                showToast('أضف منتجات إلى الحقيبة أولاً');
+                return;
+            }
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+            const govSelect = document.getElementById('cust-governorate');
+            const selectedGov = storeState.governorates[govSelect.value] ? storeState.governorates[govSelect.value].name : 'القاهرة';
+
+            if (!name || !phone || !address) {
+                showToast('يرجى إكمال بيانات الاسم ورقم الموبايل والعنوان');
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const shipping = getSelectedShippingCost();
+
+            const newOrder = {
+                id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
+                date: new Date().toLocaleString('ar-EG'),
+                customerName: name,
+                customerPhone: phone,
+                customerGovernorate: selectedGov,
+                customerAddress: address,
+                items: [...cart],
+                subtotal,
+                shipping,
+                total: subtotal + shipping
+            };
+
+            storeState.orders.unshift(newOrder);
+            cart = [];
+            document.getElementById('cust-name').value = '';
+            document.getElementById('cust-phone').value = '';
+            document.getElementById('cust-address').value = '';
+            updateCartUI();
+            toggleCart(false);
+            if (isAdminLoggedIn) renderAdminOrders();
+            showToast(`تم استلام طلبك بنجاح! رقم الطلب: ${newOrder.id}`);
+        }
+
+        // Admin Auth & Drawer
+        function handleAdminTrigger() {
+            if (isAdminLoggedIn) {
+                openAdminDrawer('products');
+            } else {
+                document.getElementById('admin-password-input').value = '';
+                document.getElementById('admin-login-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+        }
+
+        function submitAdminLogin(e) {
+            e.preventDefault();
+            const entered = document.getElementById('admin-password-input').value;
+            if (entered === storeState.adminPassword) {
+                isAdminLoggedIn = true;
+                closeAdminLogin();
+                document.getElementById('admin-banner').classList.remove('hidden');
+                document.getElementById('admin-lock-icon').className = 'fa-solid fa-unlock text-emerald-400 text-sm';
+                renderProducts();
+                openAdminDrawer('products');
+                showToast('تم تفعيل وضع الأدمن بنجاح');
+            } else {
+                showToast('كلمة المرور غير صحيحة');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            document.getElementById('admin-banner').classList.add('hidden');
+            document.getElementById('admin-lock-icon').className = 'fa-solid fa-lock text-sm';
+            closeAdminDrawer();
+            renderProducts();
+            showToast('تم تسجيل الخروج من وضع الأدمن');
+        }
+
+        function openAdminDrawer(tabName) {
+            if (!isAdminLoggedIn) return;
+            document.getElementById('admin-drawer').classList.remove('hidden');
+            switchAdminTab(tabName);
+            populateAdminForms();
+        }
+
+        function closeAdminDrawer() {
+            document.getElementById('admin-drawer').classList.add('hidden');
+        }
+
+        function switchAdminTab(tab) {
+            ['products', 'shipping', 'sizes', 'content', 'orders', 'security'].forEach(t => {
+                const el = document.getElementById(`admin-tab-${t}`);
+                if (el) el.classList.add('hidden');
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (btn) btn.className = 'admin-tab-btn py-3.5 px-4 text-xs sm:text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white whitespace-nowrap';
+            });
+            const activeEl = document.getElementById(`admin-tab-${tab}`);
+            if (activeEl) activeEl.classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tab}`);
+            if (activeBtn) activeBtn.className = 'admin-tab-btn py-3.5 px-4 text-xs sm:text-sm font-bold border-b-2 border-white text-white whitespace-nowrap';
+        }
+
+        function populateAdminForms() {
+            const c = storeState.siteContent;
+            document.getElementById('cms-announcement').value = c.announcement;
+            document.getElementById('cms-hero-title').value = c.heroTitle;
+            document.getElementById('cms-hero-subtitle').value = c.heroSubtitle;
+            document.getElementById('cms-hero-img-input').value = c.heroImage;
+            document.getElementById('cms-whatsapp').value = storeState.whatsappNumber;
+            document.getElementById('cms-footer-contact').value = c.footerContact;
+
+            renderAdminProductsList();
+            renderAdminGovernoratesList();
+            renderAdminSizeGuideRows();
+            renderAdminOrders();
+        }
+
+        function handleImageUpload(event, targetInputId) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(targetInputId).value = e.target.result;
+                showToast('تم رفع الصورة بنجاح');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveSiteContent() {
+            if (!isAdminLoggedIn) return;
+            storeState.siteContent.announcement = document.getElementById('cms-announcement').value;
+            storeState.siteContent.heroTitle = document.getElementById('cms-hero-title').value;
+            storeState.siteContent.heroSubtitle = document.getElementById('cms-hero-subtitle').value;
+            storeState.siteContent.heroImage = document.getElementById('cms-hero-img-input').value;
+            storeState.siteContent.footerContact = document.getElementById('cms-footer-contact').value;
+            storeState.whatsappNumber = document.getElementById('cms-whatsapp').value.trim();
+            renderSiteContent();
+            showToast('تم حفظ تعديلات الواجهة بنجاح');
+        }
+
+        // General Size Guide CMS
+        function renderAdminSizeGuideRows() {
+            const container = document.getElementById('admin-size-guide-rows');
+            container.innerHTML = storeState.generalSizeGuide.map((row, idx) => `
+                <div class="flex items-center gap-2 bg-charcoal p-3 rounded-xl border border-white/10">
+                    <input type="text" id="sg-size-${idx}" value="${row.size}" placeholder="Size" class="w-16 bg-obsidian border border-white/15 rounded-lg px-2 py-1.5 text-xs text-white text-center font-bold">
+                    <input type="text" id="sg-chest-${idx}" value="${row.chest}" placeholder="الصدر" class="flex-1 bg-obsidian border border-white/15 rounded-lg px-2 py-1.5 text-xs text-white">
+                    <input type="text" id="sg-length-${idx}" value="${row.length}" placeholder="الطول" class="flex-1 bg-obsidian border border-white/15 rounded-lg px-2 py-1.5 text-xs text-white">
+                    <input type="text" id="sg-shoulder-${idx}" value="${row.shoulder}" placeholder="الكتف" class="flex-1 bg-obsidian border border-white/15 rounded-lg px-2 py-1.5 text-xs text-white">
+                    <button onclick="deleteSizeGuideRow(${idx})" class="text-red-400 p-2"><i class="fa-solid fa-trash text-xs"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function addNewSizeGuideRow() {
+            storeState.generalSizeGuide.push({ size: 'XXL', chest: '70', length: '80', shoulder: '68' });
+            renderAdminSizeGuideRows();
+        }
+
+        function deleteSizeGuideRow(idx) {
+            storeState.generalSizeGuide.splice(idx, 1);
+            renderAdminSizeGuideRows();
+        }
+
+        function saveGeneralSizeGuide() {
+            if (!isAdminLoggedIn) return;
+            const updated = [];
+            storeState.generalSizeGuide.forEach((_, idx) => {
+                const size = document.getElementById(`sg-size-${idx}`).value.trim();
+                const chest = document.getElementById(`sg-chest-${idx}`).value.trim();
+                const length = document.getElementById(`sg-length-${idx}`).value.trim();
+                const shoulder = document.getElementById(`sg-shoulder-${idx}`).value.trim();
+                if (size) updated.push({ size, chest, length, shoulder });
+            });
+            storeState.generalSizeGuide = updated;
+            showToast('تم حفظ جدول المقاسات العام بنجاح');
+        }
+
+        function openSizeGuideModal() {
+            const tbody = document.getElementById('general-size-guide-tbody');
+            tbody.innerHTML = storeState.generalSizeGuide.map(r => `
+                <tr><td class="py-2.5 font-bold text-white">${r.size}</td><td>${r.chest}</td><td>${r.length}</td><td>${r.shoulder}</td></tr>
+            `).join('');
+            document.getElementById('size-guide-modal').classList.remove('hidden');
+        }
+
+        function closeSizeGuideModal() {
+            document.getElementById('size-guide-modal').classList.add('hidden');
+        }
+
+        // Governorates Shipping
+        function renderAdminGovernoratesList() {
+            const list = document.getElementById('admin-governorates-list');
+            list.innerHTML = storeState.governorates.map((gov, idx) => `
+                <div class="flex items-center justify-between gap-3 bg-obsidian p-3 rounded-xl border border-white/10">
+                    <span class="text-xs font-bold text-white">${gov.name}</span>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="gov-price-${idx}" value="${gov.price}" class="w-24 bg-charcoal border border-white/15 rounded-lg px-2.5 py-1 text-xs text-white font-mono">
+                        <span class="text-xs text-neutral-400">EGP</span>
+                        <button onclick="updateGovernoratePrice(${idx})" class="bg-white/10 hover:bg-white hover:text-black text-white px-3 py-1 rounded-lg text-xs font-bold transition">حفظ</button>
+                        <button onclick="deleteGovernorate(${idx})" class="text-red-400 hover:text-red-300 p-1"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateGovernoratePrice(idx) {
+            if (!isAdminLoggedIn) return;
+            storeState.governorates[idx].price = Number(document.getElementById(`gov-price-${idx}`).value);
+            showToast('تم تحديث سعر الشحن');
+        }
+
+        function addNewGovernorate() {
+            if (!isAdminLoggedIn) return;
+            const name = document.getElementById('new-gov-name').value.trim();
+            const price = Number(document.getElementById('new-gov-price').value);
+            if (!name || isNaN(price)) {
+                showToast('أدخل اسم المحافظة وسعر الشحن');
+                return;
+            }
+            storeState.governorates.push({ name, price });
+            document.getElementById('new-gov-name').value = '';
+            document.getElementById('new-gov-price').value = '';
+            renderAdminGovernoratesList();
+            showToast('تمت إضافة المحافظة');
+        }
+
+        function deleteGovernorate(idx) {
+            if (!isAdminLoggedIn) return;
+            storeState.governorates.splice(idx, 1);
+            renderAdminGovernoratesList();
+            showToast('تم الحذف');
+        }
+
+        // Products CRUD
+        function renderAdminProductsList() {
+            const list = document.getElementById('admin-products-list');
+            list.innerHTML = storeState.products.map(p => `
+                <div class="flex items-center justify-between gap-3 bg-obsidian p-3 rounded-2xl border border-white/10">
+                    <div class="flex items-center gap-3">
+                        <img src="${p.image}" class="w-12 h-14 object-cover rounded-xl">
+                        <div>
+                            <h5 class="font-bold text-xs sm:text-sm text-white">${p.name}</h5>
+                            <p class="text-xs font-mono text-neutral-400">${p.price} EGP | ${p.category}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="editProductFromCard('${p.id}')" class="p-2 rounded-xl bg-white/10 hover:bg-white hover:text-black text-xs transition"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteProduct('${p.id}')" class="p-2 rounded-xl bg-red-500/15 text-red-400 hover:bg-red-500 hover:text-white text-xs transition"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editProductFromCard(id) {
+            if (!isAdminLoggedIn) return;
+            const p = storeState.products.find(item => item.id === id);
+            if (!p) return;
+            openAdminDrawer('products');
+            document.getElementById('form-prod-heading').innerHTML = `<i class="fa-solid fa-pen"></i> <span>تعديل المنتج: ${p.name}</span>`;
+            document.getElementById('edit-prod-id').value = p.id;
+            document.getElementById('prod-name-input').value = p.name;
+            document.getElementById('prod-price-input').value = p.price;
+            document.getElementById('prod-cat-input').value = p.category;
+            document.getElementById('prod-badge-input').value = p.badge || '';
+            document.getElementById('prod-img-input').value = p.image;
+            document.getElementById('prod-sizes-input').value = p.sizes.join(', ');
+            document.getElementById('prod-desc-input').value = p.description;
+            document.getElementById('prod-extra-details-input').value = p.extraDetails || '';
+            document.getElementById('prod-size-chart-input').value = p.sizeChart || '';
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+        }
+
+        function resetProductForm() {
+            document.getElementById('form-prod-heading').innerHTML = `<i class="fa-solid fa-plus-circle"></i> <span>إضافة منتج جديد للمتجر</span>`;
+            document.getElementById('edit-prod-id').value = '';
+            document.getElementById('prod-name-input').value = '';
+            document.getElementById('prod-price-input').value = '';
+            document.getElementById('prod-badge-input').value = '';
+            document.getElementById('prod-img-input').value = '';
+            document.getElementById('prod-sizes-input').value = 'S, M, L, XL';
+            document.getElementById('prod-desc-input').value = '';
+            document.getElementById('prod-extra-details-input').value = '';
+            document.getElementById('prod-size-chart-input').value = '';
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+        }
+
+        function saveProductFromAdmin() {
+            if (!isAdminLoggedIn) return;
+            const id = document.getElementById('edit-prod-id').value;
+            const name = document.getElementById('prod-name-input').value.trim();
+            const price = Number(document.getElementById('prod-price-input').value);
+            const category = document.getElementById('prod-cat-input').value;
+            const badge = document.getElementById('prod-badge-input').value.trim();
+            const image = document.getElementById('prod-img-input').value.trim() || 'https://placehold.co/600x750/121212/FFFFFF?text=%E2%88%85+ONE';
+            const sizes = document.getElementById('prod-sizes-input').value.split(',').map(s => s.trim()).filter(Boolean);
+            const description = document.getElementById('prod-desc-input').value.trim();
+            const extraDetails = document.getElementById('prod-extra-details-input').value.trim();
+            const sizeChart = document.getElementById('prod-size-chart-input').value.trim();
+
+            if (!name || !price) {
+                showToast('أدخل اسم المنتج والسعر');
+                return;
+            }
+
+            if (id) {
+                const idx = storeState.products.findIndex(p => p.id === id);
+                if (idx > -1) {
+                    storeState.products[idx] = { id, name, price, category, badge, image, sizes, description, extraDetails, sizeChart };
+                }
+                showToast('تم التعديل بنجاح');
+            } else {
+                storeState.products.unshift({
+                    id: 'prod-' + Date.now(),
+                    name, price, category, badge, image, sizes, description, extraDetails, sizeChart
+                });
+                showToast('تمت إضافة المنتج');
+            }
+
+            resetProductForm();
+            renderProducts();
+            renderAdminProductsList();
+        }
+
+        function deleteProduct(id) {
+            if (!isAdminLoggedIn) return;
+            storeState.products = storeState.products.filter(p => p.id !== id);
+            renderProducts();
+            renderAdminProductsList();
+            showToast('تم حذف القطعة');
+        }
+
+        function renderAdminOrders() {
+            document.getElementById('orders-count-badge').innerText = storeState.orders.length;
+            const list = document.getElementById('admin-orders-list');
+            if (storeState.orders.length === 0) {
+                list.innerHTML = `<div class="text-center py-10 text-neutral-500 text-sm">لا توجد طلبات حتى الآن.</div>`;
+                return;
+            }
+            list.innerHTML = storeState.orders.map(o => `
+                <div class="bg-obsidian border border-white/10 rounded-2xl p-4 space-y-2 text-xs">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                        <span class="font-mono font-bold text-white">${o.id}</span>
+                        <span class="text-neutral-400">${o.date}</span>
+                    </div>
+                    <p><strong class="text-neutral-300">العميل:</strong> ${o.customerName} (${o.customerPhone})</p>
+                    <p><strong class="text-neutral-300">المحافظة:</strong> ${o.customerGovernorate} — الشحن: ${o.shipping} EGP</p>
+                    <p><strong class="text-neutral-300">العنوان:</strong> ${o.customerAddress}</p>
+                    <div class="bg-charcoal p-2.5 rounded-xl space-y-1">
+                        ${o.items.map(i => `<div class="flex justify-between"><span>${i.name} (${i.size}) × ${i.qty}</span><span class="font-mono">${i.price * i.qty} EGP</span></div>`).join('')}
+                    </div>
+                    <div class="flex justify-between items-center pt-1 font-bold text-sm text-white border-t border-white/10">
+                        <span>الإجمالي الشامل:</span>
+                        <span class="font-mono text-emerald-400">${o.total} EGP</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearAllOrders() {
+            if (!isAdminLoggedIn) return;
+            storeState.orders = [];
+            renderAdminOrders();
+            showToast('تم مسح سجل الطلبات');
+        }
+
+        function updateAdminPassword() {
+            if (!isAdminLoggedIn) return;
+            const newPass = document.getElementById('new-admin-pass').value.trim();
+            if (newPass.length < 4) {
+                showToast('كلمة المرور يجب أن تكون 4 أحرف على الأقل');
+                return;
+            }
+            storeState.adminPassword = newPass;
+            document.getElementById('new-admin-pass').value = '';
+            showToast('تم تحديث كلمة المرور');
+        }
+    </script>
+</body>
+</html>
